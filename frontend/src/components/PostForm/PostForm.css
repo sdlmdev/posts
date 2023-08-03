@@ -1,0 +1,13 @@
+.post-form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  padding: 20px 50px 0;
+  max-width: 800px;
+  width: 100%;
+  margin-bottom: 35px;
+}
+
+.post-form__input {
+  margin-bottom: 10px;
+}

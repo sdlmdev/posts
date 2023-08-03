@@ -3,6 +3,7 @@ const config = require('./config');
 const router = require('./routes');
 const handleError = require('./middlewares/handleError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const cors = require('./middlewares/cors');
 
 const app = express();
 
@@ -16,6 +17,7 @@ const startServer = async () => {
   }
 };
 
+app.use(cors);
 app.use(router);
 app.use(requestLogger);
 app.use(errorLogger);
