@@ -10,7 +10,7 @@ function App() {
   const getPostList = async () => {
     try {
       const postList = await getPosts();
-      console.log(postList);
+
       setPosts(postList);
     } catch (err) {
       console.log(err);
@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="page">
-      <main className="main">
+      <main>
         <PostForm />
         <PostList posts={posts} />
       </main>

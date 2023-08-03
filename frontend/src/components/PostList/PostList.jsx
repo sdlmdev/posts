@@ -6,7 +6,7 @@ function PostList({ posts }) {
   const [isPostsStatus, setIsPostsStatus] = useState(false);
 
   useEffect(() => {
-    if (posts.length === 0 || posts === undefined) {
+    if (posts.length === 0) {
       setIsPostsStatus(true);
     } else {
       setIsPostsStatus(false);
