@@ -15,7 +15,9 @@ function PostList({ posts }) {
 
   return (
     <section className={`post-collection ${isPostsStatus ? 'post-collection_error' : ''}`}>
-      { posts.length > 0 ? posts.map((post) => <PostElement post={post} key={post.id} />) : 'Постов пока нет' }
+      {posts.length > 0
+        ? posts.map((post) => <PostElement post={post} key={post._id} />)
+        : 'Постов пока нет'}
     </section>
   );
 }

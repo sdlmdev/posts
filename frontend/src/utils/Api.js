@@ -15,4 +15,21 @@ const getPosts = async () => {
   return checkResponse(request);
 };
 
-module.exports = getPosts;
+const createPost = async (data) => {
+  const request = await fetch('http://localhost:3001/posts', {
+    method: 'POST',
+    headers: {
+      'Content-type': 'application/json',
+    },
+    body: JSON.stringify({
+      title: data.title,
+      description: data.description,
+    }),
+  });
+  return checkResponse(request);
+};
+
+module.exports = {
+  getPosts,
+  createPost,
+};

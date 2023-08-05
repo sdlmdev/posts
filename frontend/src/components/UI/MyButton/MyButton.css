@@ -11,10 +11,16 @@
   color: #fff;
   border-radius: 2px;
   border: 1px solid #fff;
-  transition: .5s ease-in-out;
+  transition: .4s ease-in-out;
+}
+
+.custom-button_disabled {
+  border: 1px solid #ff0000;
+  opacity: .6;
+  color: #ff0000;
 }
 
 .custom-button:hover {
-  opacity: .7;
+  opacity: .6;
   cursor: pointer;
 }

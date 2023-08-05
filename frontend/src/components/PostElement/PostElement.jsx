@@ -6,7 +6,7 @@ function PostElement({ post }) {
     <article className="post">
       <div className="post__content">
         <strong className="post__title">{post.title}</strong>
-        <p className="post__text">{post.body}</p>
+        <p className="post__text">{post.description}</p>
       </div>
       <button className="post__delete-button" type="button">Удалить</button>
     </article>
