@@ -1,9 +1,9 @@
 const postsRouter = require('express').Router();
-const { getPosts, createPost } = require('../controllers/posts');
-const { validationPost } = require('../middlewares/validation');
-// const posts = require('../utils/postsList');
+const { getPosts, createPost, deletePost } = require('../controllers/posts');
+const { validationPost, validationPostId } = require('../middlewares/validation');
 
-postsRouter.get('/posts', getPosts);
-postsRouter.post('/posts', validationPost, createPost);
+postsRouter.get('/', getPosts);
+postsRouter.post('/', validationPost, createPost);
+postsRouter.delete('/:id', validationPostId, deletePost);
 
 module.exports = postsRouter;

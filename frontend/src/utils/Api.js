@@ -12,6 +12,7 @@ const getPosts = async () => {
       'Content-type': 'application/json',
     },
   });
+
   return checkResponse(request);
 };
 
@@ -26,10 +27,23 @@ const createPost = async (data) => {
       description: data.description,
     }),
   });
+
+  return checkResponse(request);
+};
+
+const deletePost = async (postId) => {
+  const request = await fetch(`http://localhost:3001/posts/${postId}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-type': 'application/json',
+    },
+  });
+
   return checkResponse(request);
 };
 
 module.exports = {
   getPosts,
   createPost,
+  deletePost,
 };

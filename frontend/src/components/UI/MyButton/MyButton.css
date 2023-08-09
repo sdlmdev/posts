@@ -15,9 +15,8 @@
 }
 
 .custom-button_disabled {
-  border: 1px solid #ff0000;
   opacity: .6;
-  color: #ff0000;
+  pointer-events: none;
 }
 
 .custom-button:hover {

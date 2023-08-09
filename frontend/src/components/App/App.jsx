@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import PostList from '../PostList/PostList';
+import PostForm from '../PostForm/PostForm';
 import {
   getPosts,
   createPost,
+  deletePost,
 } from '../../utils/Api';
-import PostForm from '../PostForm/PostForm';
 import './App.css';
 
 function App() {
@@ -31,6 +32,18 @@ function App() {
     }
   };
 
+  const handleDeletePost = async (post) => {
+    try {
+      await deletePost(post._id);
+
+      const newPostList = posts.filter((i) => i._id !== post._id);
+
+      setPosts(newPostList);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   useEffect(() => {
     getPostList();
   }, []);
@@ -43,6 +56,7 @@ function App() {
         />
         <PostList
           posts={posts}
+          handleDeletePost={handleDeletePost}
         />
       </main>
     </div>

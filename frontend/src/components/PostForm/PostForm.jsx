@@ -27,6 +27,8 @@ function PostForm({ createNewPost }) {
     };
 
     createNewPost(newPost);
+    setTitle('');
+    setDescription('');
   };
 
   useEffect(() => {
