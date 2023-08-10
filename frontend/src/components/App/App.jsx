@@ -15,7 +15,7 @@ function App() {
     try {
       const postList = await getPosts();
 
-      setPosts(postList);
+      setPosts(postList.reverse());
     } catch (err) {
       console.log(err);
       setPosts([]);
@@ -26,7 +26,7 @@ function App() {
     try {
       const newPosts = await createPost(data);
 
-      setPosts([...posts, newPosts]);
+      setPosts([newPosts, ...posts]);
     } catch (err) {
       console.log(err);
     }
@@ -56,6 +56,7 @@ function App() {
         />
         <PostList
           posts={posts}
+          setPosts={setPosts}
           handleDeletePost={handleDeletePost}
         />
       </main>

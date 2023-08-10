@@ -1,0 +1,14 @@
+.custom-select {
+  background-color: #000;
+  color: #fff;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 3px;
+  border: 1px solid #fff;
+}
+
+.custom-select:focus {
+  outline: 1px solid #fff;
+}

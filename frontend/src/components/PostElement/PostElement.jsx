@@ -12,7 +12,13 @@ function PostElement({ post, deleteThisPost }) {
         <strong className="post__title">{post.title}</strong>
         <p className="post__text">{post.description}</p>
       </div>
-      <button className="post__delete-button" type="button" onClick={handleDeleteThisPost}>Удалить</button>
+      <button
+        className="post__delete-button"
+        type="button"
+        onClick={handleDeleteThisPost}
+      >
+        Удалить
+      </button>
     </article>
   );
 }
