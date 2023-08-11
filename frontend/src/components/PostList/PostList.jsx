@@ -1,60 +1,56 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import './PostList.css';
 import PostElement from '../PostElement/PostElement';
-import MySelect from '../UI/MySelect/MySelect';
-import MyInput from '../UI/MyInput/MyInput';
+import PostsFilter from '../PostsFilter/PostsFilter';
 
-function PostList({ posts, handleDeletePost, setPosts }) {
+function PostList({ posts, handleDeletePost }) {
   const [isPostLengthStatus, setIsPostLengthStatus] = useState(false);
-  const [selectedSortingMethod, setSelectedSortingMethod] = useState('');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [filter, setFilter] = useState({ method: '', query: '' });
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  const sortedPosts = useMemo(() => {
+    if (filter.method) {
+      return [...posts].sort(
+        (a, b) => a[filter.method].localeCompare(b[filter.method]),
+      );
+    }
+    return posts;
+  }, [posts, filter.method]);
 
-  const sortingPosts = (method) => {
-    setSelectedSortingMethod(method);
-    setPosts(
-      [...posts].sort((a, b) => a[method].localeCompare(b[method])),
-    );
-  };
+  const searchedPosts = useMemo(() => sortedPosts.filter(
+    (i) => i.title.toLowerCase().includes(filter.query.toLowerCase()),
+  ), [filter.query, sortedPosts]);
 
-  useEffect(() => {
-    if (posts.length === 0) {
+  const getNotFoundError = () => {
+    if (sortedPosts.length === 0 || searchedPosts.length === 0) {
       setIsPostLengthStatus(false);
     } else {
       setIsPostLengthStatus(true);
     }
-  }, [posts]);
+  };
+
+  useEffect(() => {
+    getNotFoundError();
+  }, [sortedPosts, searchedPosts]);
 
   return (
-    <section className={`post-collection ${!isPostLengthStatus ? 'post-collection_error' : ''}`}>
-      <div className="post-collection__options">
-        <MySelect
-          value={selectedSortingMethod}
-          onChange={sortingPosts}
-          defaultValue="Сортировка"
-          options={[
-            { value: 'title', name: 'По названию' },
-            { value: 'description', name: 'По описанию' },
-          ]}
-        />
-        <MyInput
-          value={searchQuery}
-          onChange={handleSearchChange}
-          placeholder="Введите текст для поиска"
-        />
-      </div>
+    <section className="post-collection">
+      <PostsFilter
+        filter={filter}
+        setFilter={setFilter}
+      />
       {isPostLengthStatus
-        ? posts.map((post) => (
+        ? searchedPosts.map((post) => (
           <PostElement
             post={post}
             key={post._id}
             deleteThisPost={handleDeletePost}
           />
         ))
-        : 'Постов пока нет'}
+        : (
+          <p className={!isPostLengthStatus ? 'post-collection_error' : ''}>
+            Постов пока нет
+          </p>
+        )}
     </section>
   );
 }

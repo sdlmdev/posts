@@ -15,20 +15,8 @@
   padding-top: 100px;
 }
 
-.post-collection__options {
-  display: flex;
-  flex-direction: row;
-  gap: 10px;
-}
-
 @media screen and (max-width: 530px) {
   .post-collection {
     padding: 15px 15px 0;
-  }
-}
-
-@media screen and (max-width: 360px) {
-  .post-collection__options {
-    flex-direction: column;
   }
 }
