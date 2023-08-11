@@ -40,7 +40,7 @@ function PostForm({ createNewPost }) {
   }, [title, description]);
 
   return (
-    <form className="post-form" onSubmit={addNewPost}>
+    <form className="post-form" name="create-post" onSubmit={addNewPost}>
       <MyInput
         placeholder="Введите название поста"
         type="text"

@@ -2,10 +2,16 @@ import React, { useState, useEffect } from 'react';
 import './PostList.css';
 import PostElement from '../PostElement/PostElement';
 import MySelect from '../UI/MySelect/MySelect';
+import MyInput from '../UI/MyInput/MyInput';
 
 function PostList({ posts, handleDeletePost, setPosts }) {
   const [isPostLengthStatus, setIsPostLengthStatus] = useState(false);
   const [selectedSortingMethod, setSelectedSortingMethod] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+
+  const handleSearchChange = (e) => {
+    setSearchQuery(e.target.value);
+  };
 
   const sortingPosts = (method) => {
     setSelectedSortingMethod(method);
@@ -24,7 +30,7 @@ function PostList({ posts, handleDeletePost, setPosts }) {
 
   return (
     <section className={`post-collection ${!isPostLengthStatus ? 'post-collection_error' : ''}`}>
-      <div>
+      <div className="post-collection__options">
         <MySelect
           value={selectedSortingMethod}
           onChange={sortingPosts}
@@ -33,6 +39,11 @@ function PostList({ posts, handleDeletePost, setPosts }) {
             { value: 'title', name: 'По названию' },
             { value: 'description', name: 'По описанию' },
           ]}
+        />
+        <MyInput
+          value={searchQuery}
+          onChange={handleSearchChange}
+          placeholder="Введите текст для поиска"
         />
       </div>
       {isPostLengthStatus
