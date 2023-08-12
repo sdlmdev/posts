@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   CSSTransition,
   TransitionGroup,
@@ -6,26 +6,16 @@ import {
 import './PostList.css';
 import PostElement from '../PostElement/PostElement';
 import PostsFilter from '../PostsFilter/PostsFilter';
+import { useSearchedPosts } from '../../hooks/usePost';
 
 function PostList({ posts, handleDeletePost }) {
   const [isPostLengthStatus, setIsPostLengthStatus] = useState(false);
   const [filter, setFilter] = useState({ method: '', query: '' });
 
-  const sortedPosts = useMemo(() => {
-    if (filter.method) {
-      return [...posts].sort(
-        (a, b) => a[filter.method].localeCompare(b[filter.method]),
-      );
-    }
-    return posts;
-  }, [posts, filter.method]);
-
-  const searchedPosts = useMemo(() => sortedPosts.filter(
-    (i) => i.title.toLowerCase().includes(filter.query.toLowerCase()),
-  ), [filter.query, sortedPosts]);
+  const sortedAndSearchedPosts = useSearchedPosts(posts, filter.method, filter.query);
 
   const getNotFoundError = () => {
-    if (sortedPosts.length === 0 || searchedPosts.length === 0) {
+    if (sortedAndSearchedPosts.length === 0) {
       setIsPostLengthStatus(false);
     } else {
       setIsPostLengthStatus(true);
@@ -34,7 +24,7 @@ function PostList({ posts, handleDeletePost }) {
 
   useEffect(() => {
     getNotFoundError();
-  }, [sortedPosts, searchedPosts]);
+  }, [sortedAndSearchedPosts]);
 
   return (
     <section className="post-collection">
@@ -45,7 +35,7 @@ function PostList({ posts, handleDeletePost }) {
       {isPostLengthStatus
         ? (
           <TransitionGroup>
-            {searchedPosts.map((post) => (
+            {sortedAndSearchedPosts.map((post) => (
               <CSSTransition
                 key={post._id}
                 timeout={500}

@@ -1,7 +1,7 @@
 import React from 'react';
 import './MyInput.css';
 
-function MyInput({ ...props }) {
+function MyInput({ longText, ...props }) {
   return (
     props.longText
       // eslint-disable-next-line react/jsx-props-no-spreading
