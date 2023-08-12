@@ -44,18 +44,18 @@ function PostForm({ createNewPost }) {
       <MyInput
         placeholder="Введите название поста"
         type="text"
-        className="post-form__input"
+        className="post-form__title"
         value={title}
         name="title"
         onChange={handleInputChange}
       />
       <MyInput
         placeholder="Введите описание поста"
-        type="text"
-        className="post-form__input"
+        className="post-form__description"
         value={description}
         name="description"
         onChange={handleInputChange}
+        longText
       />
       <MyButton
         disabled={isButtonInactive}

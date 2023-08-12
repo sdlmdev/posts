@@ -1,4 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react';
+import {
+  CSSTransition,
+  TransitionGroup,
+} from 'react-transition-group';
 import './PostList.css';
 import PostElement from '../PostElement/PostElement';
 import PostsFilter from '../PostsFilter/PostsFilter';
@@ -39,13 +43,22 @@ function PostList({ posts, handleDeletePost }) {
         setFilter={setFilter}
       />
       {isPostLengthStatus
-        ? searchedPosts.map((post) => (
-          <PostElement
-            post={post}
-            key={post._id}
-            deleteThisPost={handleDeletePost}
-          />
-        ))
+        ? (
+          <TransitionGroup>
+            {searchedPosts.map((post) => (
+              <CSSTransition
+                key={post._id}
+                timeout={500}
+                classNames="post-animation"
+              >
+                <PostElement
+                  post={post}
+                  deleteThisPost={handleDeletePost}
+                />
+              </CSSTransition>
+            ))}
+          </TransitionGroup>
+        )
         : (
           <p className={!isPostLengthStatus ? 'post-collection_error' : ''}>
             Постов пока нет

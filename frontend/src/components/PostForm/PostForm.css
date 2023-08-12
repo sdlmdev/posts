@@ -8,8 +8,16 @@
   margin-bottom: 35px;
 }
 
-.post-form__input {
+.post-form__title {
   margin-bottom: 10px;
+}
+
+.post-form__description {
+  margin-bottom: 10px;
+  min-height: 30px;
+  min-width: 100%;
+  max-width: 100%;
+  width: 100%;
 }
 
 @media screen and (max-width: 530px) {

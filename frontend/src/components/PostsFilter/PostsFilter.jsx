@@ -27,6 +27,7 @@ function PostsFilter({ filter, setFilter }) {
         value={filter.query}
         onChange={handleSearchChange}
         placeholder="Введите текст для поиска"
+        className="post-collection__input"
       />
     </div>
   );

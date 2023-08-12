@@ -63,6 +63,25 @@
   cursor: pointer;
 }
 
+.post-animation-enter {
+  opacity: 0;
+}
+
+.post-animation-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+
+.post-animation-exit {
+  /* transform: translateZ(-150px); */
+  opacity: 1;
+}
+
+.post-animation-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
+
 @media screen and (max-width: 730px) {
   .post__content {
     max-width: 300px;
