@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   CSSTransition,
   TransitionGroup,
@@ -7,24 +7,12 @@ import './PostList.css';
 import PostElement from '../PostElement/PostElement';
 import PostsFilter from '../PostsFilter/PostsFilter';
 import { useSearchedPosts } from '../../hooks/usePost';
+import MyLoader from '../UI/MyLoader/MyLoader';
 
-function PostList({ posts, handleDeletePost }) {
-  const [isPostLengthStatus, setIsPostLengthStatus] = useState(false);
+function PostList({ posts, handleDeletePost, isLoading }) {
   const [filter, setFilter] = useState({ method: '', query: '' });
 
   const sortedAndSearchedPosts = useSearchedPosts(posts, filter.method, filter.query);
-
-  const getNotFoundError = () => {
-    if (sortedAndSearchedPosts.length === 0) {
-      setIsPostLengthStatus(false);
-    } else {
-      setIsPostLengthStatus(true);
-    }
-  };
-
-  useEffect(() => {
-    getNotFoundError();
-  }, [sortedAndSearchedPosts]);
 
   return (
     <section className="post-collection">
@@ -32,7 +20,8 @@ function PostList({ posts, handleDeletePost }) {
         filter={filter}
         setFilter={setFilter}
       />
-      {isPostLengthStatus
+      {isLoading && <MyLoader />}
+      {sortedAndSearchedPosts.length > 0 && !isLoading
         ? (
           <TransitionGroup>
             {sortedAndSearchedPosts.map((post) => (
@@ -49,9 +38,9 @@ function PostList({ posts, handleDeletePost }) {
             ))}
           </TransitionGroup>
         )
-        : (
-          <p className={!isPostLengthStatus ? 'post-collection_error' : ''}>
-            Постов пока нет
+        : !isLoading && sortedAndSearchedPosts.length === 0 && (
+          <p className="post-collection_error">
+            Посты не найдены
           </p>
         )}
     </section>

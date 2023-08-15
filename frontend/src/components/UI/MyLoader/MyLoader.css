@@ -1,0 +1,26 @@
+.custom-preloader {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 50px;
+  animation: rotate 5s infinite linear;
+}
+
+.custom-preloader__container {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  border: 5px dotted #fff;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

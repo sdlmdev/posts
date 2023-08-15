@@ -10,15 +10,18 @@ import './App.css';
 
 function App() {
   const [posts, setPosts] = useState([]);
+  const [isLoading, setIsloading] = useState(false);
 
   const getPostList = async () => {
+    setIsloading(true);
     try {
       const postList = await getPosts();
 
       setPosts(postList.reverse());
     } catch (err) {
       console.log(err);
-      setPosts([]);
+    } finally {
+      setIsloading(false);
     }
   };
 
@@ -58,6 +61,7 @@ function App() {
           posts={posts}
           setPosts={setPosts}
           handleDeletePost={handleDeletePost}
+          isLoading={isLoading}
         />
       </main>
     </div>

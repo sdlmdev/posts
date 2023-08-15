@@ -18,6 +18,8 @@ module.exports = {
   ],
   rules: {
     'react/prop-types': 'off',
+    'react/jsx-props-no-spreading': 'off',
+    'react/jsx-props-no-multi-spaces': 'off',
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
   },
 };
