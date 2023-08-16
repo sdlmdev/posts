@@ -9,7 +9,6 @@
 * JavaScript
 * React
 * Flexbox
-* Адаптивная верстка
 
 ## Установка и запуск проекта:
 * Клонировать репозиторий: `git clone https://github.com/sdlmdev/movies-explorer-frontend`

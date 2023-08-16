@@ -73,7 +73,6 @@
 }
 
 .post-animation-exit {
-  /* transform: translateZ(-150px); */
   opacity: 1;
 }
 

@@ -8,11 +8,31 @@ import PostElement from '../PostElement/PostElement';
 import PostsFilter from '../PostsFilter/PostsFilter';
 import { useSearchedPosts } from '../../hooks/usePost';
 import MyLoader from '../UI/MyLoader/MyLoader';
+import usePagination from '../../hooks/usePagination';
+import { getPages } from '../../utils/utils';
+import { PAGE_POSTS_LENGTH } from '../../utils/constants';
 
-function PostList({ posts, handleDeletePost, isLoading }) {
+function PostList({
+  posts,
+  handleDeletePost,
+  isLoading,
+}) {
   const [filter, setFilter] = useState({ method: '', query: '' });
+  const [currentPageNumber, setCurrentPageNumber] = useState(0);
 
-  const sortedAndSearchedPosts = useSearchedPosts(posts, filter.method, filter.query);
+  const handleChangePage = (e) => {
+    setCurrentPageNumber(e.target.innerText - 1);
+  };
+
+  const pagesWithPosts = getPages(posts, PAGE_POSTS_LENGTH);
+
+  const sortedAndSearchedPosts = useSearchedPosts(
+    pagesWithPosts[currentPageNumber] || [],
+    filter.method,
+    filter.query,
+  );
+
+  const pageNumbers = usePagination(pagesWithPosts.length);
 
   return (
     <section className="post-collection">
@@ -43,6 +63,18 @@ function PostList({ posts, handleDeletePost, isLoading }) {
             Посты не найдены
           </p>
         )}
+      <div className="post-collection__pages">
+        {pageNumbers.map((i) => (
+          <button
+            className="post-collection__pages_button"
+            onClick={handleChangePage}
+            key={i}
+            type="button"
+          >
+            {i}
+          </button>
+        ))}
+      </div>
     </section>
   );
 }

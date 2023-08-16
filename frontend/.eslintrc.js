@@ -20,6 +20,7 @@ module.exports = {
     'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-props-no-multi-spaces': 'off',
+    'no-plusplus': 'off',
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
   },
 };
