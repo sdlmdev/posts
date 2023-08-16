@@ -1,4 +1,4 @@
-const checkResponse = async (res) => {
+const checkResponse = (res) => {
   if (res.ok) {
     return res.json();
   }
@@ -6,7 +6,7 @@ const checkResponse = async (res) => {
   return Promise.reject(new Error(`Ошибка: ${res.status}`));
 };
 
-const getPosts = async () => {
+export const getPosts = async () => {
   const request = await fetch('http://localhost:3001/posts', {
     headers: {
       'Content-type': 'application/json',
@@ -16,7 +16,7 @@ const getPosts = async () => {
   return checkResponse(request);
 };
 
-const createPost = async (data) => {
+export const createPost = async (data) => {
   const request = await fetch('http://localhost:3001/posts', {
     method: 'POST',
     headers: {
@@ -31,7 +31,7 @@ const createPost = async (data) => {
   return checkResponse(request);
 };
 
-const deletePost = async (postId) => {
+export const deletePost = async (postId) => {
   const request = await fetch(`http://localhost:3001/posts/${postId}`, {
     method: 'DELETE',
     headers: {
@@ -40,10 +40,4 @@ const deletePost = async (postId) => {
   });
 
   return checkResponse(request);
-};
-
-module.exports = {
-  getPosts,
-  createPost,
-  deletePost,
 };

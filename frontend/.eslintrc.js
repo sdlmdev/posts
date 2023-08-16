@@ -21,6 +21,7 @@ module.exports = {
     'react/jsx-props-no-spreading': 'off',
     'react/jsx-props-no-multi-spaces': 'off',
     'no-plusplus': 'off',
+    'import/prefer-default-export': 'off',
     'no-underscore-dangle': ['error', { allow: ['_id'] }],
   },
 };

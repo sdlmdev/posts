@@ -1,5 +1,1 @@
-const PAGE_POSTS_LENGTH = 10;
-
-module.exports = {
-  PAGE_POSTS_LENGTH,
-};
+export const PAGE_POSTS_LENGTH = 10;
