@@ -1,11 +1,13 @@
+.form-create {
+  margin: 0 auto;
+  max-width: 800px;
+}
+
 .post-form {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   padding: 20px 50px 0;
-  max-width: 800px;
   width: 100%;
-  margin-bottom: 35px;
 }
 
 .post-form__title {
@@ -23,6 +25,5 @@
 @media screen and (max-width: 530px) {
   .post-form {
     padding: 20px 15px 0;
-    margin-bottom: 25px;
   }
 }

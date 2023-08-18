@@ -1,6 +1,6 @@
 .post-collection {
   margin: 0 auto;
-  padding: 0 50px 0;
+  padding: 35px 50px 0;
   max-width: 800px;
   width: 100%;
 }
@@ -12,16 +12,16 @@
   font-weight: 500;
   line-height: 20px;
   text-align: center;
-  padding-top: 100px;
+  padding: 100px 0;
 }
 
-.post-collection__pages {
+.post-collection__page {
   display: flex;
   justify-content: center;
   padding: 10px;
 }
 
-.post-collection__pages_button {
+.post-collection__page_button {
   all: unset;
   width: 27px;
   height: 30px;
@@ -39,12 +39,16 @@
   align-content: center;
 }
 
-.post-collection__pages_button:last-child {
+.post-collection__page_button-active {
+  border: 2px solid #fff;
+}
+
+.post-collection__page_button:last-child {
   margin-right: 0;
 }
 
 @media screen and (max-width: 530px) {
   .post-collection {
-    padding: 15px 15px 0;
+    padding: 25px 15px 0;
   }
 }

@@ -63,10 +63,11 @@ function PostList({
             Посты не найдены
           </p>
         )}
-      <div className="post-collection__pages">
+      <div className="post-collection__page">
         {pageNumbers.map((i) => (
           <button
-            className="post-collection__pages_button"
+            className={`post-collection__page_button
+              ${currentPageNumber + 1 === i ? 'post-collection__page_button-active' : ''}`}
             onClick={handleChangePage}
             key={i}
             type="button"

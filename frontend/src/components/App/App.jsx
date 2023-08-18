@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import PostList from '../PostList/PostList';
-import PostForm from '../PostForm/PostForm';
+import { Routes, Route } from 'react-router-dom';
 import {
   getPosts,
   createPost,
   deletePost,
 } from '../../utils/Api';
 import './App.css';
+import Posts from '../../pages/Posts/Posts';
+import NotFound from '../../pages/NotFound/NotFound';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsloading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const getPostList = async () => {
     setIsloading(true);
@@ -49,20 +51,33 @@ function App() {
 
   useEffect(() => {
     getPostList();
+    setIsLoggedIn(true);
   }, []);
 
   return (
     <div className="page">
       <main>
-        <PostForm
-          createNewPost={createNewPost}
-        />
-        <PostList
-          posts={posts}
-          setPosts={setPosts}
-          handleDeletePost={handleDeletePost}
-          isLoading={isLoading}
-        />
+        <Routes>
+          <Route
+            path="/"
+            element={(
+              <Posts
+                isLoggedIn={isLoggedIn}
+                createNewPost={createNewPost}
+                posts={posts}
+                setPosts={setPosts}
+                handleDeletePost={handleDeletePost}
+                isLoading={isLoading}
+              />
+            )}
+          />
+          <Route
+            path="/*"
+            element={(
+              <NotFound />
+            )}
+          />
+        </Routes>
       </main>
     </div>
   );

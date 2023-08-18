@@ -40,29 +40,31 @@ function PostForm({ createNewPost }) {
   }, [title, description]);
 
   return (
-    <form className="post-form" name="create-post" onSubmit={addNewPost}>
-      <MyInput
-        placeholder="Введите название поста"
-        type="text"
-        className="post-form__title"
-        value={title}
-        name="title"
-        onChange={handleInputChange}
-      />
-      <MyInput
-        placeholder="Введите описание поста"
-        className="post-form__description"
-        value={description}
-        name="description"
-        onChange={handleInputChange}
-        longText
-      />
-      <MyButton
-        disabled={isButtonInactive}
-        text="Создать"
-        className="post-form__button"
-      />
-    </form>
+    <section className="form-create">
+      <form className="post-form" name="create-post" onSubmit={addNewPost}>
+        <MyInput
+          placeholder="Введите название поста"
+          type="text"
+          className="post-form__title"
+          value={title}
+          name="title"
+          onChange={handleInputChange}
+        />
+        <MyInput
+          placeholder="Введите описание поста"
+          className="post-form__description"
+          value={description}
+          name="description"
+          onChange={handleInputChange}
+          longText
+        />
+        <MyButton
+          disabled={isButtonInactive}
+          text="Создать"
+          className="post-form__button"
+        />
+      </form>
+    </section>
   );
 }
 
