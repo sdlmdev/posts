@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
+import './PostList.css';
 import {
   CSSTransition,
   TransitionGroup,
 } from 'react-transition-group';
-import './PostList.css';
 import PostElement from '../PostElement/PostElement';
 import PostsFilter from '../PostsFilter/PostsFilter';
 import { useSearchedPosts } from '../../hooks/usePost';
@@ -16,6 +16,7 @@ function PostList({
   posts,
   handleDeletePost,
   isLoading,
+  handleOpenPost,
 }) {
   const [filter, setFilter] = useState({ method: '', query: '' });
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
@@ -53,6 +54,7 @@ function PostList({
                 <PostElement
                   post={post}
                   deleteThisPost={handleDeletePost}
+                  handleOpenPost={handleOpenPost}
                 />
               </CSSTransition>
             ))}

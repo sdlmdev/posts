@@ -8,11 +8,27 @@ import {
 import './App.css';
 import Posts from '../../pages/Posts/Posts';
 import NotFound from '../../pages/NotFound/NotFound';
+import PopupWithPost from '../PopupWithPost/PopupWithPost';
+import { POPUP_CLOSE_TIME } from '../../utils/constants';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsloading] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isOpenPopup, setIsOpenPopup] = useState(false);
+  const [selectedPost, setSelectedPost] = useState({});
+
+  const handleOpenPost = (post) => {
+    setIsOpenPopup(!isOpenPopup);
+    setSelectedPost(post);
+  };
+
+  const handleClosePost = () => {
+    setIsOpenPopup(!isOpenPopup);
+    setTimeout(() => {
+      setSelectedPost({});
+    }, POPUP_CLOSE_TIME);
+  };
 
   const getPostList = async () => {
     setIsloading(true);
@@ -39,19 +55,22 @@ function App() {
 
   const handleDeletePost = async (post) => {
     try {
-      await deletePost(post._id);
-
+      const postData = await deletePost(post._id);
       const newPostList = posts.filter((i) => i._id !== post._id);
 
       setPosts(newPostList);
+
+      return postData;
     } catch (err) {
       console.log(err);
+
+      return false;
     }
   };
 
   useEffect(() => {
     getPostList();
-    setIsLoggedIn(true);
+    setIsLoggedIn(true); // !!!
   }, []);
 
   return (
@@ -68,6 +87,7 @@ function App() {
                 setPosts={setPosts}
                 handleDeletePost={handleDeletePost}
                 isLoading={isLoading}
+                handleOpenPost={handleOpenPost}
               />
             )}
           />
@@ -78,6 +98,12 @@ function App() {
             )}
           />
         </Routes>
+        <PopupWithPost
+          isOpenPopup={isOpenPopup}
+          handleClosePost={handleClosePost}
+          selectedPost={selectedPost}
+          handleDeletePost={handleDeletePost}
+        />
       </main>
     </div>
   );

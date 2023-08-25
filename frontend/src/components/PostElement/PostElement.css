@@ -1,6 +1,5 @@
 .post {
   display: flex;
-  justify-content: space-between;
   width: 100%;
   border-radius: 10px;
   border: 1px solid #fff;
@@ -9,6 +8,7 @@
   align-items: center;
   min-width: 270px;
   margin-top: 15px;
+  justify-content: space-between;
 }
 
 .post:nth-child(1) {
@@ -22,10 +22,10 @@
 
 .post__title {
   display: block;
-  font-size: 20px;
+  font-size: 23px;
   font-style: normal;
   font-weight: 500;
-  line-height: 20px;
+  line-height: 23px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -42,7 +42,7 @@
   white-space: nowrap;
 }
 
-.post__delete-button {
+.post__button {
   all: unset;
   font-size: 13px;
   font-style: normal;
@@ -58,43 +58,43 @@
   transition: .3s ease-in-out;
 }
 
-.post__delete-button:hover {
+.post__button:first-of-type {
+  margin-right: 15px;
+}
+
+.post__button-container {
+  display: flex;
+}
+
+.post__button:hover {
   opacity: .6;
   cursor: pointer;
 }
 
-.post-animation-enter {
-  opacity: 0;
-}
-
-.post-animation-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-
-.post-animation-exit {
-  opacity: 1;
-}
-
-.post-animation-exit-active {
-  opacity: 0;
-  transition: opacity 500ms ease-in;
-}
-
-@media screen and (max-width: 730px) {
+@media screen and (max-width: 800px) {
   .post__content {
     max-width: 300px;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .post__content {
     max-width: 200px;
   }
 }
 
-@media screen and (max-width: 400px) {
+@media screen and (max-width: 450px) {
   .post__content {
     max-width: 150px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .post {
+    flex-direction: column;
+  }
+
+  .post__content {
+    max-width: 100%;
   }
 }

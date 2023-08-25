@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './PostForm.css';
 import MyButton from '../UI/MyButton/MyButton';
 import MyInput from '../UI/MyInput/MyInput';
+import { MAX_POST_TITLE_LENGTH } from '../../utils/constants';
 
 function PostForm({ createNewPost }) {
   const [isButtonInactive, setIsButtonInactive] = useState(false);
@@ -49,6 +50,7 @@ function PostForm({ createNewPost }) {
           value={title}
           name="title"
           onChange={handleInputChange}
+          maxLength={MAX_POST_TITLE_LENGTH}
         />
         <MyInput
           placeholder="Введите описание поста"

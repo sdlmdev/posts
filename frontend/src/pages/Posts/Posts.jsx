@@ -9,6 +9,7 @@ function Posts({
   setPosts,
   handleDeletePost,
   isLoading,
+  handleOpenPost,
 }) {
   return (
     <>
@@ -22,6 +23,7 @@ function Posts({
         setPosts={setPosts}
         handleDeletePost={handleDeletePost}
         isLoading={isLoading}
+        handleOpenPost={handleOpenPost}
       />
     </>
   );
