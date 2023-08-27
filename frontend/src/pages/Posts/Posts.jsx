@@ -6,10 +6,10 @@ function Posts({
   isLoggedIn,
   createNewPost,
   posts,
-  setPosts,
-  handleDeletePost,
   isLoading,
   handleOpenPost,
+  showDeletionConfirmation,
+  setSelectedPost,
 }) {
   return (
     <>
@@ -20,10 +20,10 @@ function Posts({
       )}
       <PostList
         posts={posts}
-        setPosts={setPosts}
-        handleDeletePost={handleDeletePost}
         isLoading={isLoading}
         handleOpenPost={handleOpenPost}
+        showDeletionConfirmation={showDeletionConfirmation}
+        setSelectedPost={setSelectedPost}
       />
     </>
   );

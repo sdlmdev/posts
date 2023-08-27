@@ -1,0 +1,14 @@
+.custom-icon {
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 20px;
+  height: 20px;
+  background-color: initial;
+  border: none;
+  transition: .3s ease-in-out;
+  cursor: pointer;
+}
+
+.custom-icon:hover {
+  opacity: .5;
+}

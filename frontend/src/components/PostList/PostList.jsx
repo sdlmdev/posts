@@ -14,9 +14,10 @@ import { PAGE_POSTS_LENGTH } from '../../utils/constants';
 
 function PostList({
   posts,
-  handleDeletePost,
   isLoading,
   handleOpenPost,
+  showDeletionConfirmation,
+  setSelectedPost,
 }) {
   const [filter, setFilter] = useState({ method: '', query: '' });
   const [currentPageNumber, setCurrentPageNumber] = useState(0);
@@ -53,8 +54,9 @@ function PostList({
               >
                 <PostElement
                   post={post}
-                  deleteThisPost={handleDeletePost}
                   handleOpenPost={handleOpenPost}
+                  showDeletionConfirmation={showDeletionConfirmation}
+                  setSelectedPost={setSelectedPost}
                 />
               </CSSTransition>
             ))}

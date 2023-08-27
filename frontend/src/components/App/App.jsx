@@ -3,32 +3,22 @@ import { Routes, Route } from 'react-router-dom';
 import {
   getPosts,
   createPost,
-  deletePost,
+  deleteThisPost,
 } from '../../utils/Api';
 import './App.css';
 import Posts from '../../pages/Posts/Posts';
 import NotFound from '../../pages/NotFound/NotFound';
 import PopupWithPost from '../PopupWithPost/PopupWithPost';
 import { POPUP_CLOSE_TIME } from '../../utils/constants';
+import PopupWithConfirmation from '../PopupWithConfirmation/PopupWithConfirmation';
 
 function App() {
   const [posts, setPosts] = useState([]);
   const [isLoading, setIsloading] = useState(false);
+  const [isDeletion, setIsDeletion] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isOpenPopup, setIsOpenPopup] = useState(false);
   const [selectedPost, setSelectedPost] = useState({});
-
-  const handleOpenPost = (post) => {
-    setIsOpenPopup(!isOpenPopup);
-    setSelectedPost(post);
-  };
-
-  const handleClosePost = () => {
-    setIsOpenPopup(!isOpenPopup);
-    setTimeout(() => {
-      setSelectedPost({});
-    }, POPUP_CLOSE_TIME);
-  };
 
   const getPostList = async () => {
     setIsloading(true);
@@ -53,9 +43,9 @@ function App() {
     }
   };
 
-  const handleDeletePost = async (post) => {
+  const deletePost = async (post) => {
     try {
-      const postData = await deletePost(post._id);
+      const postData = await deleteThisPost(post._id);
       const newPostList = posts.filter((i) => i._id !== post._id);
 
       setPosts(newPostList);
@@ -68,10 +58,61 @@ function App() {
     }
   };
 
+  const handleOpenPost = (post) => {
+    setIsOpenPopup(true);
+    setSelectedPost(post);
+  };
+
+  const clearSelectedPost = () => {
+    setTimeout(() => {
+      setSelectedPost({});
+    }, POPUP_CLOSE_TIME);
+  };
+
+  const handleClosePost = () => {
+    setIsOpenPopup(false);
+    clearSelectedPost();
+  };
+
+  const handleCloseConfirmation = () => {
+    setIsDeletion(false);
+  };
+
+  const showDeletionConfirmation = () => {
+    setIsDeletion(true);
+  };
+
   useEffect(() => {
     getPostList();
     setIsLoggedIn(true); // !!!
   }, []);
+
+  useEffect(() => {
+    const handleClosePopup = (e) => {
+      switch (true) {
+        case isDeletion && isOpenPopup && (e.target.classList.contains('popup') || e.key === 'Escape'):
+          handleCloseConfirmation();
+          break;
+        case isDeletion && !isOpenPopup && (e.target.classList.contains('popup') || e.key === 'Escape'):
+          handleCloseConfirmation();
+          clearSelectedPost();
+          break;
+        case !isDeletion && isOpenPopup && (e.target.classList.contains('popup') || e.key === 'Escape'):
+          handleClosePost();
+          break;
+        default:
+          break;
+      }
+    };
+
+    document.addEventListener('keydown', handleClosePopup);
+    document.addEventListener('mousedown', handleClosePopup);
+
+    return () => {
+      document.removeEventListener('keydown', handleClosePopup);
+      document.removeEventListener('mousedown', handleClosePopup);
+    };
+  }, [isDeletion, isOpenPopup]);
 
   return (
     <div className="page">
@@ -84,10 +125,10 @@ function App() {
                 isLoggedIn={isLoggedIn}
                 createNewPost={createNewPost}
                 posts={posts}
-                setPosts={setPosts}
-                handleDeletePost={handleDeletePost}
                 isLoading={isLoading}
                 handleOpenPost={handleOpenPost}
+                showDeletionConfirmation={showDeletionConfirmation}
+                setSelectedPost={setSelectedPost}
               />
             )}
           />
@@ -102,7 +143,15 @@ function App() {
           isOpenPopup={isOpenPopup}
           handleClosePost={handleClosePost}
           selectedPost={selectedPost}
-          handleDeletePost={handleDeletePost}
+          deletePost={deletePost}
+          showDeletionConfirmation={showDeletionConfirmation}
+        />
+        <PopupWithConfirmation
+          isDeletion={isDeletion}
+          deletePost={deletePost}
+          selectedPost={selectedPost}
+          handleCloseConfirmation={handleCloseConfirmation}
+          handleClosePost={handleClosePost}
         />
       </main>
     </div>

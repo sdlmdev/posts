@@ -1,32 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import './PopupWithPost.css';
-import { OVERFLOW_BORDER } from '../../utils/constants';
+import { POST_DESCR_OVERFLOW_BORDER } from '../../utils/constants';
+import MyIconButton from '../UI/MyIconButton/MyIconButton';
 
 function PopupWithPost({
   handleClosePost,
   selectedPost,
-  handleDeletePost,
   isOpenPopup,
+  showDeletionConfirmation,
 }) {
   const [isTextOverflow, setIsTextOverflow] = useState(false);
   const [windowSize, setWindowSize] = useState({
     width: window.innerWidth,
   });
 
-  const onDeletePost = async () => {
-    try {
-      const post = await handleDeletePost(selectedPost);
-
-      if (post) {
-        handleClosePost();
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
-    if (selectedPost.description && (selectedPost.description.length > OVERFLOW_BORDER)) {
+    if (selectedPost.description
+      && (selectedPost.description.length > POST_DESCR_OVERFLOW_BORDER)) {
       setIsTextOverflow(true);
     } else {
       setIsTextOverflow(false);
@@ -48,33 +38,29 @@ function PopupWithPost({
   }, []);
 
   return (
-    <div className={`post-popup ${isOpenPopup ? 'post-popup_opened' : ''}`}>
+    <div className={`popup post-popup ${isOpenPopup ? 'post-popup_opened' : ''}`}>
       <article className="post-popup__element">
         <div className="post-popup__buttons">
-          <button
-            className="post-popup__button  post-popup__button_delete"
-            type="button"
-            onClick={onDeletePost}
+          <MyIconButton
+            className="post-popup__button_delete"
+            onClick={showDeletionConfirmation}
             aria-label="delete"
           />
-          <button
-            className="post-popup__button post-popup__button_close"
-            type="button"
+          <MyIconButton
             onClick={handleClosePost}
+            className="post-popup__button_close"
             aria-label="close"
           />
         </div>
         <strong
-          className={`post-popup__title
-          ${windowSize.width < 550
+          className={`post-popup__title ${windowSize.width < 550
             ? 'post-popup__text_overflow'
             : ''}`}
         >
           {selectedPost.title}
         </strong>
         <p
-          className={`post-popup__text
-          ${isTextOverflow
+          className={`post-popup__text ${isTextOverflow
             ? 'post-popup__text_overflow'
             : ''}`}
         >

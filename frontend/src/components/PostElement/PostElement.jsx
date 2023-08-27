@@ -3,11 +3,13 @@ import './PostElement.css';
 
 function PostElement({
   post,
-  deleteThisPost,
   handleOpenPost,
+  showDeletionConfirmation,
+  setSelectedPost,
 }) {
-  const handleDeleteThisPost = () => {
-    deleteThisPost(post);
+  const onDeletePost = () => {
+    showDeletionConfirmation();
+    setSelectedPost(post);
   };
 
   const onOpenClick = () => {
@@ -31,7 +33,7 @@ function PostElement({
         <button
           className="post__button"
           type="button"
-          onClick={handleDeleteThisPost}
+          onClick={onDeletePost}
         >
           Удалить
         </button>

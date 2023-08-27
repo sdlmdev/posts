@@ -31,7 +31,7 @@ export const createPost = async (data) => {
   return checkResponse(request);
 };
 
-export const deletePost = async (postId) => {
+export const deleteThisPost = async (postId) => {
   const request = await fetch(`http://localhost:3001/posts/${postId}`, {
     method: 'DELETE',
     headers: {
