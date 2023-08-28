@@ -3,6 +3,7 @@ export const getPages = (posts, chunkSize) => {
 
   for (let i = 0; i < posts.length; i += chunkSize) {
     result.push(posts.slice(i, i + chunkSize));
+    console.log(result);
   }
 
   return result;

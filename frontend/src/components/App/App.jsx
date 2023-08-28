@@ -11,6 +11,7 @@ import NotFound from '../../pages/NotFound/NotFound';
 import PopupWithPost from '../PopupWithPost/PopupWithPost';
 import { POPUP_CLOSE_TIME } from '../../utils/constants';
 import PopupWithConfirmation from '../PopupWithConfirmation/PopupWithConfirmation';
+import Footer from '../Footer/Footer';
 
 function App() {
   const [posts, setPosts] = useState([]);
@@ -139,21 +140,22 @@ function App() {
             )}
           />
         </Routes>
-        <PopupWithPost
-          isOpenPopup={isOpenPopup}
-          handleClosePost={handleClosePost}
-          selectedPost={selectedPost}
-          deletePost={deletePost}
-          showDeletionConfirmation={showDeletionConfirmation}
-        />
-        <PopupWithConfirmation
-          isDeletion={isDeletion}
-          deletePost={deletePost}
-          selectedPost={selectedPost}
-          handleCloseConfirmation={handleCloseConfirmation}
-          handleClosePost={handleClosePost}
-        />
       </main>
+      <Footer />
+      <PopupWithPost
+        isOpenPopup={isOpenPopup}
+        handleClosePost={handleClosePost}
+        selectedPost={selectedPost}
+        deletePost={deletePost}
+        showDeletionConfirmation={showDeletionConfirmation}
+      />
+      <PopupWithConfirmation
+        isDeletion={isDeletion}
+        deletePost={deletePost}
+        selectedPost={selectedPost}
+        handleCloseConfirmation={handleCloseConfirmation}
+        handleClosePost={handleClosePost}
+      />
     </div>
   );
 }

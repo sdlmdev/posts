@@ -6,6 +6,7 @@ function MySelect({
   defaultValue,
   value,
   onChange,
+  ...props
 }) {
   const handleChangeSelect = (e) => {
     onChange(e.target.value);
@@ -13,7 +14,11 @@ function MySelect({
 
   return (
     <select
-      className="custom-select"
+      className={`custom-select ${
+        props.className
+          ? props.className
+          : ''
+      }`}
       value={value}
       onChange={handleChangeSelect}
     >

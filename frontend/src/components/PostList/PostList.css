@@ -1,8 +1,12 @@
 .post-collection {
   margin: 0 auto;
-  padding: 35px 50px 0;
+  padding: 35px 50px;
   max-width: 800px;
   width: 100%;
+}
+
+.post-collection__container {
+  margin-bottom: 20px;
 }
 
 .post-collection_error {
@@ -12,7 +16,7 @@
   font-weight: 500;
   line-height: 20px;
   text-align: center;
-  padding: 100px 0;
+  padding: 299px 0 319px;
 }
 
 .post-collection__page {
@@ -47,13 +51,18 @@
   margin-right: 0;
 }
 
+.post-collection__small-container {
+  overflow: hidden;
+  max-height: 618px;
+}
+
 .post-animation-enter {
   opacity: 0;
 }
 
 .post-animation-enter-active {
   opacity: 1;
-  transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-in-out;
 }
 
 .post-animation-exit {
@@ -62,11 +71,21 @@
 
 .post-animation-exit-active {
   opacity: 0;
-  transition: opacity 500ms ease-in;
+  transition: opacity 500ms ease-in-out;
 }
 
 @media screen and (max-width: 530px) {
   .post-collection {
-    padding: 25px 15px 0;
+    padding: 25px 15px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .post-collection__small-container {
+    max-height: 776px;
+  }
+
+  .post-collection_error {
+    padding: 50px 0;
   }
 }

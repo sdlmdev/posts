@@ -5,7 +5,15 @@
   margin-bottom: 15px;
 }
 
+.post-collection__select {
+  width: 70px;
+}
+
 @media screen and (max-width: 550px) {
+  .post-collection__select {
+    width: auto;
+  }
+
   .post-collection__options {
     flex-direction: column;
   }

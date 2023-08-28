@@ -3,13 +3,23 @@ import MySelect from '../UI/MySelect/MySelect';
 import MyInput from '../UI/MyInput/MyInput';
 import './PostsFilter.css';
 
-function PostsFilter({ filter, setFilter }) {
+function PostsFilter({
+  filter,
+  setFilter,
+  setPostsLength,
+  postsLength,
+  posts,
+}) {
   const handleSearchChange = (e) => {
     setFilter({ ...filter, query: e.target.value });
   };
 
   const getSortingMethod = (method) => {
     setFilter({ ...filter, method });
+  };
+
+  const handleChangePostsLength = (value) => {
+    setPostsLength(+value);
   };
 
   return (
@@ -21,6 +31,18 @@ function PostsFilter({ filter, setFilter }) {
         options={[
           { value: 'title', name: 'По названию' },
           { value: 'description', name: 'По описанию' },
+        ]}
+      />
+      <MySelect
+        className="post-collection__select"
+        value={postsLength}
+        onChange={handleChangePostsLength}
+        defaultValue="Количество постов"
+        options={[
+          { value: 5, name: '5' },
+          { value: 10, name: '10' },
+          { value: 15, name: '15' },
+          { value: posts.length, name: 'Все' },
         ]}
       />
       <MyInput
