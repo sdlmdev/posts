@@ -2,6 +2,8 @@
 Учебный проект где пользователь может оставить пост на общей стене
 
 ## Функциональность
+* Создание поста
+* Фильтрация и пагинация постов
 
 ## Технологии:
 * HTML5
@@ -11,7 +13,7 @@
 * Flexbox
 
 ## Установка и запуск проекта:
-* Клонировать репозиторий: `git clone https://github.com/sdlmdev/movies-explorer-frontend`
+* Клонировать репозиторий: `git clone https://github.com/sdlmdev/posts`
 * Установить зависимости: `npm install`
 * Запустить: `npm run start` для Frontend | `npm run dev` для Backend с hot-reload
 
