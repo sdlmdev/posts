@@ -31,6 +31,7 @@ function PostsFilter({
         options={[
           { value: 'title', name: 'По названию' },
           { value: 'description', name: 'По описанию' },
+          { value: '', name: 'По умолчанию' },
         ]}
       />
       <MySelect
